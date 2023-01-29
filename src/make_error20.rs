@@ -2,7 +2,7 @@
 #[macro_export]
 macro_rules! make_error20 {
     (@s actix) => {
-        impl actix_web::ResponseError for $name {
+        impl actix_web::ResponseError for Error {
             fn error_response(&self) -> actix_web::HttpResponse {
                 actix_web::HttpResponse::build(self.status_code())
                     .insert_header(actix_web::http::header::ContentType::html())
@@ -10,7 +10,7 @@ macro_rules! make_error20 {
             }
             fn status_code(&self) -> actix_web::http::StatusCode {
                 match *self {
-                    $name::GeneralError(_) => {
+                    Error::GeneralError(_) => {
                         actix_web::http::StatusCode::INTERNAL_SERVER_ERROR
                     },
                 }

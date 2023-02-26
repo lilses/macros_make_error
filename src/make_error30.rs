@@ -35,7 +35,7 @@ macro_rules! make_error30 {
             where
                 T: ToString,
             {
-                tracing::error!("{:?}", Error::GeneralError(x.to_string()));
+                tracing::error!("*** => {:?}", Error::GeneralError(x.to_string()));
                 Error::GeneralError(x.to_string())
             }
         }

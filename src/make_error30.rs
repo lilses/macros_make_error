@@ -28,16 +28,18 @@ macro_rules! make_error30 {
             where
                 T: ToString,
             {
-                Error::GeneralError(x.to_string())
+                Error::GeneralError(format!("*** {} {}",file!(),x.to_string()))
             }
 
             pub fn from_general_with_trace<T>(x: T) -> Self
             where
                 T: ToString,
             {
-                tracing::error!("*** => {:?}", Error::GeneralError(x.to_string()));
+                tracing::error!("*** {} => {:?}", file!(), Error::GeneralError(x.to_string()));
                 Error::GeneralError(x.to_string())
             }
+
+
         }
 
         impl std::fmt::Display for Error {
